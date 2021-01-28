@@ -56,11 +56,6 @@ void setup()
     // nothing to do
   });
 
-  // watchdog
-  timer1 = timerBegin(1, 80, true); //timer 0, div 80
-  timerAttachInterrupt(timer1, &resetModule, true);
-  timerAlarmWrite(timer1, 20000000, false); //set time in us
-  timerAlarmEnable(timer1);                 //enable interrupt
 
   //Communication between ESP and Ozone Device
   deviceName = new Device(network);
@@ -69,7 +64,7 @@ void setup()
 
 void loop()
 {
-  timerWrite(timer1, 0); //reset timer (feed watchdog)
+
   network->loop(millis());
   delay(20);
 }
